@@ -28,7 +28,8 @@ fn test_func() {
 }
 
 fn main() {
-    println!("{}", EchoCli::get_usage());
+    //println!("{}", EchoCli::get_usage());
+    EchoCli::usage();
     //println!("{:?}", args.text);
     //println!("{:?}", args.more_text);
 }
