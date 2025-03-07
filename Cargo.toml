@@ -7,4 +7,4 @@ authors = ["Peter Lahanas"]
 [workspace]
 
 [dependencies]
-cli = { path = "cli" }
+clap = { version = "4.5.31", features = ["derive"] }

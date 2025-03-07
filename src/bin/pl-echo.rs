@@ -1,35 +1,27 @@
-use cli::CliParser;
+use clap::Parser;
 
-#[derive(CliParser)]
-#[args(
-    prog_name = "pl-echo",
-    description = "Display a line of text to standard output"
-)]
-struct EchoCli {
-    #[args(
-        arg_type = "argument",
-        name = "string",
-        description = "the text to display"
-    )]
-    string: String,
+#[derive(Parser)]
+#[command(version="1.0", about = "Display a line of text", long_about = None)]
+struct Args {
+    /// Output text
+    string: Option<Vec<String>>,
 
-    #[args(
-        arg_type = "option",
-        long_form = "--help",
-        short_form = "-h",
-        description = "this usage string"
-    )]
-    help: String,
-}
-
-#[test]
-fn test_func() {
-    println!("Hello Test World!");
+    /// Do not output the trailing newline
+    #[arg(short)]
+    n: bool,
 }
 
 fn main() {
-    //println!("{}", EchoCli::get_usage());
-    EchoCli::usage();
-    //println!("{:?}", args.text);
-    //println!("{:?}", args.more_text);
+    let args = Args::parse();
+
+    let output_string = args.string.unwrap_or(vec!["".to_string()]);
+
+    print!("{}", output_string.join(" "));
+
+    if !args.n {
+        print!("\n")
+    }
 }
+
+#[test]
+fn test_func() {}
